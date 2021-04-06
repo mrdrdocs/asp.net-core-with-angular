@@ -1,0 +1,38 @@
+[HttpPost]
+        public bool SaveEmployee(EmployeeInfo employeeInfo)
+        {
+            try
+            {
+                using (var context = new EmployeeContext())
+                {
+                    context.EmployeeInfos.Add(employeeInfo);
+                    context.SaveChanges();
+                };
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+		
+        [HttpDelete]
+        public bool DeleteEmployee(int employeeId)
+        {
+            try
+            {
+                using (var context = new EmployeeContext())
+                {
+                    context.EmployeeInfos.Remove(context.EmployeeInfos.Where(e => e.EmployeeId == employeeId).FirstOrDefault());
+                    context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+
+        }
